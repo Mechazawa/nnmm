@@ -10,7 +10,7 @@
 
 /* Variables */
 $user = "username"; //Database username
-$pass = "password; //Database password
+$pass = "password"; //Database password
 $dbname = "nnmm"; //Database name
 $idlen = 5; //Length of the id's
 
