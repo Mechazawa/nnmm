@@ -38,7 +38,7 @@ if ($pasteid) {
     
     if (count($res) == 1) {
         if(filter_var($res[0][0], FILTER_VALIDATE_URL) && substr($queryStr, -1) != "!")	
-            header("location: ".$res[0][0]);
+            header("location: ".trim($res[0][0]));
         else
             print $res[0][0];
     } else {
@@ -65,7 +65,7 @@ SYNOPSIS
     Python
         pasteurl = urllib2.urlopen("http://nnmm.nl/", <data>).read()
     Bash
-        <command> | curl -d @- http://nnmm.nl
+        <command> | curl --data-binary @- nnmm.nl 
 
 DESCRIPTION
     Just post any data to this server and it'll give you a "paste" link.
