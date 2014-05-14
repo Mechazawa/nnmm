@@ -12,7 +12,7 @@
 $user = "username"; //Database username
 $pass = "password"; //Database password
 $dbname = "nnmm"; //Database name
-$idlen = 5; //Length of the id's
+$idlen = 3; //Length of the id's
 
 
 header("content-type: text/plain; charset=UTF-8");
@@ -38,10 +38,11 @@ if ($pasteid) {
     $res = $st->fetchAll();
     
     if (count($res) == 1) {
-        if(filter_var($res[0][0], FILTER_VALIDATE_URL) && substr($queryStr, -1) != "!")	
+        if(filter_var($res[0][0], FILTER_VALIDATE_URL) && substr($queryStr, -1) != "!") {	
             header("location: ".trim($res[0][0]));
-        else
+        } else {
             print $res[0][0];
+        }
     } else {
         die(header("HTTP/1.0 404 Not Found"));
     }
