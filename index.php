@@ -18,6 +18,7 @@ $idlen = 5; //Length of the id's
 header("content-type: text/plain; charset=UTF-8");
 header("X-Content-Type-Options: nosniff");
 
+$protocol=empty($_SERVER['HTTPS'])?"http":"https";
 $queryStr=$_SERVER['QUERY_STRING'];
 $pasteid=preg_replace("/[^a-zA-Z0-9]/", "", $queryStr);
 $pastedata=$_SERVER["REQUEST_METHOD"] == "POST" ? 
@@ -55,7 +56,7 @@ if ($pasteid) {
     }
     $ins = $db->prepare("INSERT INTO `pastes` (`id`, `data`) VALUES (?, ?)");
     $ins->execute(array($str, $pastedata));
-    print "http://nnmm.nl/?$str";
+    print "$protocol://nnmm.nl/?$str";
 
 } else { ?>
 NAME
