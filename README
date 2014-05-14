@@ -1,0 +1,23 @@
+NAME
+    nnmm - nnmm stands for nothing
+
+SYNOPSIS 
+    Python
+        pasteurl = urllib2.urlopen("https://nnmm.nl/", <data>).read()
+    Bash
+        <command> | curl --data-urlencode @- nnmm.nl
+
+DESCRIPTION
+    Just post any data to this page and it will give you a "paste" link.
+    If the data is an url (ex "http://example.com/") it will return the
+    same kind of url but it will instead be a shortened url. This means
+    that it will redirect instead of show the data. This can be stopped 
+    by adding a ! at the end of the url.
+    
+SEE ALSO
+    The current source code can be found at https://nnmm.nl/s.php
+    The git repo can be found at https://github.com/Mechazawa/nnmm 
+
+INSTALLING
+    Change the database login etc in the index and apply the sql file 
+    to the database.
