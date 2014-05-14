@@ -56,7 +56,7 @@ if ($pasteid) {
     }
     $ins = $db->prepare("INSERT INTO `pastes` (`id`, `data`) VALUES (?, ?)");
     $ins->execute(array($str, $pastedata));
-    print "$protocol://nnmm.nl/?$str";
+    print "$protocol://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]?$str";
 
 } else { ?>
 NAME
