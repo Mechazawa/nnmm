@@ -24,7 +24,7 @@ $pasteid=preg_replace("/[^a-zA-Z0-9]/", "", $queryStr);
 $pastedata=$_SERVER["REQUEST_METHOD"] == "POST" ? 
                 urldecode(file_get_contents('php://input')) : false;
 
-$db = new PDO('mysql:dbname=".$dbname.";host=127.0.0.1', $user, $pass);
+$db = new PDO("mysql:dbname=$dbname;host=127.0.0.1", $user, $pass);
 
 $validchars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 $sql = "SELECT data from pastes where id = ?";
