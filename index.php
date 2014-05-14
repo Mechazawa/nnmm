@@ -31,7 +31,7 @@ $sql = "SELECT data from pastes where id = ?";
 
 if ($pasteid) {
     if(strlen($pasteid) > $idlen || strlen($pasteid) <= 1)
-        die(header("HTTP/1.0 404 Faggot detected"));
+        die(header("HTTP/1.0 414 Request-URI Too Long"));
     
     $st = $db->prepare($sql);
     $st->execute(array($pasteid));
