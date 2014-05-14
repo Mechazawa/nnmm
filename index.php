@@ -65,7 +65,7 @@ SYNOPSIS
     Python
         pasteurl = urllib2.urlopen("http://nnmm.nl/", <data>).read()
     Bash
-        <command> | curl --data-binary @- nnmm.nl 
+        <command> | curl --data-urlencode @- nnmm.nl 
 
 DESCRIPTION
     Just post any data to this server and it'll give you a "paste" link.
