@@ -22,7 +22,7 @@ $protocol=empty($_SERVER['HTTPS'])?"http":"https";
 $queryStr=$_SERVER['QUERY_STRING'];
 $pasteid=preg_replace("/[^a-zA-Z0-9]/", "", $queryStr);
 $pastedata=$_SERVER["REQUEST_METHOD"] == "POST" ? 
-                urldecode(file_get_contents('php://input')) : false;
+                urldecode(str_replace("+", "%2B", file_get_contents('php://input'))) : false;
 
 $db = new PDO("mysql:dbname=$dbname;host=127.0.0.1", $user, $pass);
 
