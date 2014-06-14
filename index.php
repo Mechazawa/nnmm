@@ -15,7 +15,7 @@ $dbname = "nnmm"; //Database name
 $idlen = 3; //Length of the id's
 
 
-header("content-type: text/plain; charset=UTF-8");
+header("content-type: text/plain; charset=UTF-8; imeanit=yes");
 header("X-Content-Type-Options: nosniff");
 
 $protocol=empty($_SERVER['HTTPS'])?"http":"https";
