@@ -26,6 +26,7 @@ $pastedata=$_SERVER["REQUEST_METHOD"] == "POST" ?
 
 $db = new PDO("mysql:dbname=$dbname;host=127.0.0.1", $user, $pass);
 
+$reUrl='/^(?:[;\/?:@&=+$,]|(?:[^\W_]|[-_.!~*\()\[\]])|(?:%[\da-fA-F]{2}))*$/';
 $validchars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 $sql = "SELECT data from pastes where id = ?";
 
@@ -38,7 +39,7 @@ if ($pasteid) {
     $res = $st->fetchAll();
     
     if (count($res) == 1) {
-        if(filter_var($res[0][0], FILTER_VALIDATE_URL) && substr($queryStr, -1) != "!") {	
+        if(preg_match($reUrl, $res[0][0]) == 1 && substr($queryStr, -1) != "!") {	
             header("location: ".trim($res[0][0]));
         } else {
             print $res[0][0];
