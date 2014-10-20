@@ -10,7 +10,6 @@
 CREATE TABLE `pastes` (                                                         
   `id` varchar(6) NOT NULL,                                                     
   `data` longtext,                                                              
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMES
-TAMP,                                                                           
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,                                                                           
   PRIMARY KEY (`id`)                                                            
 ); 
