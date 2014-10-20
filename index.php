@@ -54,7 +54,7 @@ if ($pasteid) {
     $valid = False;
     
     while(!$valid) {
-        $str = substr(str_shuffle($validchars), 0, 5);
+        $str = substr(str_shuffle($validchars), 0, $idlen);
         $st->execute(array($str));
         $valid = count($st->fetchAll()) == 0;
     }
