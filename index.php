@@ -11,7 +11,8 @@
 /* Variables */
 $user = "username"; //Database username
 $pass = "password"; //Database password
-$dbname = "nnmm"; //Database name
+$database = "nnmm"; //Database name
+$table = "pastes";  //Table name
 $idlen = 3; //Length of the id's
 
 
@@ -24,11 +25,11 @@ $pasteid=preg_replace("/[^a-zA-Z0-9]/", "", $queryStr);
 $pastedata=$_SERVER["REQUEST_METHOD"] == "POST" ? 
                 urldecode(str_replace("+", "%2B", file_get_contents('php://input'))) : false;
 
-$db = new PDO("mysql:dbname=$dbname;host=127.0.0.1", $user, $pass);
+$db = new PDO("mysql:dbname=$database;host=127.0.0.1", $user, $pass);
 
 $reUrl='/^(?:[;\/?:@&=+$,]|(?:[^\W_]|[-_.!~*\()\[\]])|(?:%[\da-fA-F]{2}))*$/';
 $validchars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-$sql = "SELECT data from pastes where id = ?";
+$sql = "SELECT data from `$table` where `id` = ?";
 
 if ($pasteid) {
     if(strlen($pasteid) > $idlen || strlen($pasteid) <= 1)
@@ -56,7 +57,7 @@ if ($pasteid) {
         $st->execute(array($str));
         $valid = count($st->fetchAll()) == 0;
     }
-    $ins = $db->prepare("INSERT INTO `pastes` (`id`, `data`) VALUES (?, ?)");
+    $ins = $db->prepare("INSERT INTO `$table` (`id`, `data`) VALUES (?, ?)");
     $ins->execute(array($str, $pastedata));
     print "$protocol://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]?$str";
 
