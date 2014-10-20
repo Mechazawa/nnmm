@@ -18,6 +18,7 @@ $idlen = 3; //Length of the id's
 
 header("content-type: text/plain; charset=UTF-8; imeanit=yes");
 header("X-Content-Type-Options: nosniff");
+header("Content-Disposition: inline");
 
 $protocol = empty($_SERVER['HTTPS']) ? "http" : "https";
 $queryStr = $_SERVER['QUERY_STRING'];
