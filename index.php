@@ -19,15 +19,15 @@ $idlen = 3; //Length of the id's
 header("content-type: text/plain; charset=UTF-8; imeanit=yes");
 header("X-Content-Type-Options: nosniff");
 
-$protocol=empty($_SERVER['HTTPS'])?"http":"https";
-$queryStr=$_SERVER['QUERY_STRING'];
-$pasteid=preg_replace("/[^a-zA-Z0-9]/", "", $queryStr);
-$pastedata=$_SERVER["REQUEST_METHOD"] == "POST" ? 
+$protocol = empty($_SERVER['HTTPS']) ? "http" : "https";
+$queryStr = $_SERVER['QUERY_STRING'];
+$pasteid = preg_replace("/[^a-zA-Z0-9]/", "", $queryStr);
+$pastedata = $_SERVER["REQUEST_METHOD"] == "POST" ? 
                 urldecode(str_replace("+", "%2B", file_get_contents('php://input'))) : false;
 
 $db = new PDO("mysql:dbname=$database;host=127.0.0.1", $user, $pass);
 
-$reUrl='/^[a-zA-Z]+:\/\/([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]+(\/[^\s]+)?$/';
+$reUrl = '/^[a-zA-Z]+:\/\/([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]+(\/[^\s]+)?$/';
 $validchars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 $sql = "SELECT data from `$table` where `id` = ?";
 
@@ -48,10 +48,10 @@ if ($pasteid) {
     } else {
         die(header("HTTP/1.0 404 Not Found"));
     }
-
 } elseif($_SERVER["REQUEST_METHOD"] == "POST") {
     $st = $db->prepare($sql);
     $valid = False;
+    
     while(!$valid) {
         $str = substr(str_shuffle($validchars), 0, 5);
         $st->execute(array($str));
@@ -59,8 +59,8 @@ if ($pasteid) {
     }
     $ins = $db->prepare("INSERT INTO `$table` (`id`, `data`) VALUES (?, ?)");
     $ins->execute(array($str, $pastedata));
+    
     print "$protocol://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]?$str";
-
 } else { ?>
 NAME
     nnmm - nnmm stands for nothing
@@ -81,6 +81,4 @@ DESCRIPTION
 SEE ALSO
     The current source code can be found at http://nnmm.nl/s.php
     The git repo can be found at https://github.com/Mechazawa/nnmm 
-<?php
-}
-
+<?php }
