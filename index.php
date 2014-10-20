@@ -27,7 +27,7 @@ $pastedata=$_SERVER["REQUEST_METHOD"] == "POST" ?
 
 $db = new PDO("mysql:dbname=$database;host=127.0.0.1", $user, $pass);
 
-$reUrl='/^(?:[;\/?:@&=+$,]|(?:[^\W_]|[-_.!~*\()\[\]])|(?:%[\da-fA-F]{2}))*$/';
+$reUrl='/^[a-zA-Z]+:\/\/([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]+(\/[^\s]+)?$/';
 $validchars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 $sql = "SELECT data from `$table` where `id` = ?";
 
