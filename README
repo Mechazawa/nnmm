@@ -20,4 +20,6 @@ SEE ALSO
 
 INSTALLING
     Change the database login etc in the index and apply the sql file 
-    to the database.
+    to the database. The file does not need any further configuration.
+    It can be given any name and will automatically figure out the name
+    and location of the script. 
