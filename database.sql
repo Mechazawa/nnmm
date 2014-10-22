@@ -8,8 +8,9 @@
  */                                                                             
                                                                                 
 CREATE TABLE `pastes` (                                                         
-  `id` varchar(6) NOT NULL,                                                     
-  `data` longtext,                                                              
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,                                                                           
-  PRIMARY KEY (`id`)                                                            
+  `id` varchar(6) NOT NULL,
+  `data` longtext,
+  /* OPTIONAL */
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
 ); 
