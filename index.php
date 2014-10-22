@@ -33,8 +33,9 @@ $validchars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 $sql = "SELECT data from `$table` where `id` = ?";
 
 if ($pasteid) {
-    if(strlen($pasteid) > $idlen || strlen($pasteid) <= 1)
+    if(strlen($pasteid) > $idlen || strlen($pasteid) <= 1) {
         die(header("HTTP/1.0 414 Request-URI Too Long"));
+    }
     
     $st = $db->prepare($sql);
     $st->execute(array($pasteid));
