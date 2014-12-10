@@ -23,7 +23,7 @@ header("Content-Disposition: inline");
 $protocol = empty($_SERVER['HTTPS']) ? "http" : "https";
 $queryStr = $_SERVER['QUERY_STRING'];
 $pasteid = preg_replace("/[^a-zA-Z0-9]/", "", $queryStr);
-$pastedata = $_SERVER["REQUEST_METHOD"] == "POST" ? 
+$pastedata = $_SERVER["REQUEST_METHOD"] == "POST" ?
                 urldecode(str_replace("+", "%2B", file_get_contents('php://input'))) : false;
 
 $db = new PDO("mysql:dbname=$database;host=127.0.0.1", $user, $pass);
@@ -36,13 +36,13 @@ if ($pasteid) {
     if(strlen($pasteid) > $idlen || strlen($pasteid) <= 1) {
         die(header("HTTP/1.0 414 Request-URI Too Long"));
     }
-    
+
     $st = $db->prepare($sql);
     $st->execute(array($pasteid));
     $res = $st->fetchAll();
-    
+
     if (count($res) == 1) {
-        if(preg_match($reUrl, $res[0][0]) == 1 && substr($queryStr, -1) != "!") {	
+        if(preg_match($reUrl, $res[0][0]) == 1 && substr($queryStr, -1) != "!") {
             header("location: ".trim($res[0][0]));
         } else {
             print $res[0][0];
@@ -53,7 +53,7 @@ if ($pasteid) {
 } elseif($_SERVER["REQUEST_METHOD"] == "POST") {
     $st = $db->prepare($sql);
     $valid = False;
-    
+
     while(!$valid) {
         $str = substr(str_shuffle($validchars), 0, $idlen);
         $st->execute(array($str));
@@ -61,13 +61,13 @@ if ($pasteid) {
     }
     $ins = $db->prepare("INSERT INTO `$table` (`id`, `data`) VALUES (?, ?)");
     $ins->execute(array($str, $pastedata));
-    
+
     print "$protocol://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]?$str";
 } else { ?>
 NAME
     nnmm - nnmm stands for nothing
 
-SYNOPSIS 
+SYNOPSIS
     Python
         pasteurl = urllib2.urlopen("<?php echo "$protocol://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>", <data>).read()
     Bash
@@ -80,7 +80,7 @@ DESCRIPTION
     same kind of url but it will instead be a shortened url. This means
     that it will redirect instead of show the data. This can be stopped 
     by adding an ! at the end of the url.
-    
+
 SEE ALSO
     The current source code can be found at http://nnmm.nl/s.php
     The git repo can be found at https://github.com/Mechazawa/nnmm 
