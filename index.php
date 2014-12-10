@@ -69,9 +69,10 @@ NAME
 
 SYNOPSIS 
     Python
-        pasteurl = urllib2.urlopen("http://nnmm.nl/", <data>).read()
+        pasteurl = urllib2.urlopen("<?php echo "$protocol://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>", <data>).read()
     Bash
-        <command> | curl --data-urlencode @- nnmm.nl 
+        <command> | curl --data-urlencode @- "<?php echo "$protocol://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>"
+        curl --data-urlencode @- "<?php echo "$protocol://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>" < <file>
 
 DESCRIPTION
     Just post any data to this server and it'll give you a "paste" link.
