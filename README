@@ -3,23 +3,27 @@ NAME
 
 SYNOPSIS 
     Python
-        pasteurl = urllib2.urlopen("https://nnmm.nl/", <data>).read()
+        pasteurl = urllib2.urlopen("http://nnmm.nl/", <data>).read()
     Bash
-        <command> | curl --data-urlencode @- nnmm.nl
+        <command> | curl --data-urlencode @- "http://nnmm.nl/"
+        curl --data-urlencode @- "http://nnmm.nl/" < <file>
 
 DESCRIPTION
-    Just post any data to this page and it will give you a "paste" link.
+    Just post any data to this server and it'll give you a "paste" link.
     If the data is an url (ex "http://example.com/") it will return the
     same kind of url but it will instead be a shortened url. This means
     that it will redirect instead of show the data. This can be stopped 
-    by adding a ! at the end of the url.
+    by adding an ! at the end of the url.
     
 SEE ALSO
-    The current source code can be found at https://nnmm.nl/s.php
+    The current source code can be found at http://nnmm.nl/s.php
     The git repo can be found at https://github.com/Mechazawa/nnmm 
 
 INSTALLING
     Change the database login etc in the index and apply the sql file 
     to the database. The file does not need any further configuration.
     It can be given any name and will automatically figure out the name
-    and location of the script. 
+    and location of the script etc. Sqlite support is not hard to
+    implement. It only requires the person installing it to change the 
+    connection string to use sqlite and a sqlite database file containing
+    the correct table structure. 
