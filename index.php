@@ -32,6 +32,8 @@ $reUrl = '/^[a-zA-Z]+:\/\/([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]+(\/[^\s]+)?$/';
 $validchars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 $sql = "SELECT data from `$table` where `id` = ?";
 
+$baseUrl = "$protocol://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
 if ($pasteid) {
     if(strlen($pasteid) > $idlen || strlen($pasteid) <= 1) {
         die(header("HTTP/1.0 414 Request-URI Too Long"));
@@ -62,17 +64,17 @@ if ($pasteid) {
     $ins = $db->prepare("INSERT INTO `$table` (`id`, `data`) VALUES (?, ?)");
     $ins->execute(array($str, $pastedata));
 
-    print "$protocol://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]?$str";
+    print "$baseUrl?$str";
 } else { ?>
 NAME
     nnmm - nnmm stands for nothing
 
 SYNOPSIS
     Python
-        pasteurl = urllib2.urlopen("<?php echo "$protocol://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>", <data>).read()
+        pasteurl = urllib2.urlopen("<?php echo $baseUrl;?>", <data>).read()
     Bash
-        <command> | curl --data-urlencode @- "<?php echo "$protocol://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>"
-        curl --data-urlencode @- "<?php echo "$protocol://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>" < <file>
+        <command> | curl --data-urlencode @- "<?php echo $baseUrl;?>"
+        curl --data-urlencode @- "<?php echo $baseUrl;?>" < <file>
 
 DESCRIPTION
     Just post any data to this server and it'll give you a "paste" link.
