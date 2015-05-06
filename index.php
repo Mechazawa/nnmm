@@ -8,14 +8,15 @@
  * ----------------------------------------------------------------------------
  */
 
-/* Variables */
+/* Start config */
 $user = "username"; //Database username
 $pass = "password"; //Database password
 $database = "nnmm"; //Database name
 $table = "pastes";  //Table name
 $idlen = 3; //Length of the id's
+/* End config */
 
-
+// All the data sent is plain text, imeanit=yes is a Firefox quirk
 header("content-type: text/plain; charset=UTF-8; imeanit=yes");
 header("X-Content-Type-Options: nosniff");
 header("Content-Disposition: inline");
@@ -26,10 +27,13 @@ $pasteid = preg_replace("/[^a-zA-Z0-9]/", "", $queryStr);
 $pastedata = $_SERVER["REQUEST_METHOD"] == "POST" ?
                 urldecode(str_replace("+", "%2B", file_get_contents('php://input'))) : false;
 
+// Change this if you do not wish to use MySQL. SQLite should work just fine
 $db = new PDO("mysql:dbname=$database;host=127.0.0.1", $user, $pass);
 
-$reUrl = '/^[a-zA-Z]+:\/\/([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]+(\/[^\s]+)?$/';
+// The variable validchars and the regex used in pasteid should be 
+// changed if you want to add support for other characters.
 $validchars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+$reUrl = '/^[a-zA-Z]+:\/\/([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]+(\/[^\s]+)?$/';
 $sql = "SELECT data from `$table` where `id` = ?";
 
 $baseUrl = "$protocol://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -47,7 +51,7 @@ if ($pasteid) {
         if(preg_match($reUrl, $res[0][0]) == 1 && substr($queryStr, -1) != "!") {
             header("location: ".trim($res[0][0]));
         } else {
-            print $res[0][0];
+            echo $res[0][0];
         }
     } else {
         die(header("HTTP/1.0 404 Not Found"));
