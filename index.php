@@ -61,7 +61,7 @@ if ($pasteid) {
     $valid = False;
 
     while(!$valid) {
-        $str = substr(str_shuffle($validchars), 0, $idlen);
+        $str = substr(str_shuffle(str_repeat($validchars, $idlen)), 0, $idlen);
         $st->execute(array($str));
         $valid = count($st->fetchAll()) == 0;
     }
