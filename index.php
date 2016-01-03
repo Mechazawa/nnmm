@@ -53,10 +53,11 @@ if ($pasteid) {
         if(preg_match($reUrl, $res[0][0]) == 1 && substr($queryStr, -1) != "!") {
             header("location: ".trim($res[0][0]));
         } else {
-            echo $res[0][0];
+            header("Content-Length: ".strlen($res[0][0]));
+            print($res[0][0]);
         }
     } else {
-        die(header("HTTP/1.0 404 Not Found"));
+        header("HTTP/1.0 404 Not Found");
     }
 } elseif($_SERVER["REQUEST_METHOD"] == "POST") {
     $st = $db->prepare($sql);
@@ -70,7 +71,9 @@ if ($pasteid) {
     $ins = $db->prepare("INSERT INTO `$table` (`id`, `data`) VALUES (?, ?)");
     $ins->execute(array($str, $pastedata));
 
-    print "$baseUrl?$str";
+    $out = "$baseUrl?$str";
+    header("Content-Length: ".strlen($out));
+    print($out);
 } else { ?>
 NAME
     nnmm - nnmm stands for nothing
