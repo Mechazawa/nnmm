@@ -36,7 +36,7 @@ $validchars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 // Use this version of validchars if you only want characters that do notb "visually overlap". 
 //$validchars = "23456789abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
 
-$reUrl = '/^[a-zA-Z]+:\/\/([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]+(\/[^\s]+)?$/';
+$reUrl = '/^https?:\/\/([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9\-]+(\/[^\s]*)?$/';
 $sql = "SELECT data from `$table` where `id` = ?";
 $baseUrl = "$protocol://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
