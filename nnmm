@@ -1,0 +1,4 @@
+#!/bin/sh
+# Mark as executable and place it in your $PATH
+# example: echo Hello World | nnmm
+curl --data-binary @- https://nnmm.nl -s | sed 's/\$/ /'
