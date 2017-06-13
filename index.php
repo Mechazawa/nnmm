@@ -94,5 +94,6 @@ DESCRIPTION
 
 SEE ALSO
     The current source code can be found at http://nnmm.nl/s.php
+    Command-line tool: https://nnmm.nl/nnmm
     The git repo can be found at https://github.com/Mechazawa/nnmm 
 <?php }
