@@ -21,6 +21,13 @@ header("content-type: text/plain; charset=UTF-8; imeanit=yes");
 header("X-Content-Type-Options: nosniff");
 header("Content-Disposition: inline");
 
+// CORS headers
+header("Access-Control-Allow-Origin: *")
+header("Access-Control-Allow-Methods: GET, POST")
+header("Access-Control-Allow-Headers: Content-Type")
+header("Access-Control-Expose-Headers: Content-Type")
+header("Access-Control-Max-Age: 600")
+
 $protocol = empty($_SERVER['HTTPS']) ? "http" : "https";
 $queryStr = $_SERVER['QUERY_STRING'];
 $pasteid = preg_replace("/[^a-zA-Z0-9]/", "", $queryStr);
