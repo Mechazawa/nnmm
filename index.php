@@ -44,7 +44,7 @@ $validchars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 //$validchars = "23456789abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
 
 $reUrl = '/^https?:\/\/([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9\-]+(\/[^\s]*)?$/';
-$sql = "SELECT data from `$table` where `id` = ?";
+$sql = "SELECT data FROM `$table` WHERE BINARY `id` = ?";
 $baseUrl = "$protocol://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
 if ($pasteid) {
