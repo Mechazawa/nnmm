@@ -40,7 +40,7 @@ $db = new PDO("mysql:dbname=$database;host=127.0.0.1", $user, $pass);
 // The variable validchars and the regex used in pasteid should be 
 // changed if you want to add support for other characters.
 $validchars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-// Use this version of validchars if you only want characters that do notb "visually overlap". 
+// Use this version of validchars if you only want characters that do not "visually overlap". 
 //$validchars = "23456789abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
 
 $reUrl = '/^https?:\/\/([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9\-]+(\/[^\s]*)?$/';
